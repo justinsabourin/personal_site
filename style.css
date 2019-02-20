@@ -11,26 +11,30 @@ h3,h4,h5 {
   margin: 0;
 }
 
-#portfolio, #about, #resume, #contact {
+#about, #portfolio, #resume, #contact {
+  width: 100%;
   position: relative;
 }
 
+#portfolio, #resume, #contact {
+  box-sizing: border-box;
+  padding: 0 5%;
+}
+
 #about, #contact {
-  overflow: hidden;
   height: 100%;
 }
 
 #portfolio {
-  padding: 0 10px;
   animation: slide-in-up 1s;
 }
 
 header {
-  width: 80%;
+  width: 90%;
+  margin: 0 5%;
   height: 40px;
   position: fixed;
   top: 0;
-  left: 10%;
   padding-bottom: 2px;
   display: flex;
   flex-direction: row;
@@ -42,11 +46,10 @@ header {
 }
 
 main {
-  width: 80%;
-  position: absolute;
-  top: 40px;
-  left: 10%;
+  width: 100%;
   height: calc(100% - 40px);
+  position: relative;
+  top: 40px;
 }
 .title {
   font-size: 25px;
@@ -92,9 +95,17 @@ nav {
 }
 
 .about-page {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 5%;
+
   display: grid;
   grid-template-columns: 500px auto;
-  height: 80%;
+  grid-template-rows: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding-bottom: 10%;
+  overflow: hidden;
 }
 
 
@@ -120,6 +131,7 @@ nav {
   justify-content: center;
   font-weight: 500;
   font-size: 80px;
+
 }
 
 .up-first {
@@ -141,15 +153,28 @@ nav {
 .portfolio-page {
   display: grid;
   grid-template-columns: 410px 410px 410px;
-  grid-template-rows: 250px 250px;
-  grid-row-gap: 50px;
+  grid-template-rows: 250px 250px 250px;
+  grid-row-gap: 65px;
   justify-content: space-between;
-  padding: 60px 0;
+  padding: 35px;
 }
 
 .portfolio-page-with-preview {
-  grid-template-rows: 600px 250px 250px;
+  grid-template-rows: auto 250px 250px 250px;
   
+}
+
+.portfolio-page .preview-description {
+  display: none;
+}
+
+.preview-expand .preview-description {
+  display: block;
+}
+
+.preview-description {
+  background-color: #cccccc;
+  border-radius: 2px;
 }
 
 .overflow {
@@ -161,6 +186,23 @@ nav {
 .portfolio-item {
   height: 100%;
   width: 100%;
+  position:relative;
+}
+
+.preview-expand {
+  grid-area: 1 / 1 / 2 / 4;
+  display: grid;
+  grid-template-columns: auto 410px;
+  grid-template-rows: 650px;
+  grid-gap: 10px;
+
+  border-bottom: 1px solid gray;
+  padding-bottom: 25px;
+}
+
+.shadow {
+  height: 100%;
+  width: 100%;
   background-color: transparent;
 
   position:relative;
@@ -169,12 +211,7 @@ nav {
             box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.preview-expand {
-  grid-area: 1 / 1 / 2 / 4;
-  
-}
-
-.portfolio-item:before, .portfolio-item:after
+.shadow:before, .shadow:after
 {
   content:"";
   position:absolute;
@@ -186,9 +223,10 @@ nav {
   bottom:0;
   left:0;
   right:0;
+  background-color: #cccccc;
 }
 
-.portfolio-item:after
+.shadow:after, .shadow:after
 {
   right:10px;
   left:auto;
@@ -220,20 +258,20 @@ nav {
   box-shadow: 2px 2px 10px black;
   border: 1px solid black;
 
-  color: #707070;
+  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
 }
 
-.btn svg, .preview-expand .btn:hover svg {
+.btn svg, .preview-expand .expand-btn:hover svg {
   height: 50%;
   width: auto;
   transition: height 0.5s;
 }
 
-.btn:hover svg, .preview-expand .btn svg, .contact-box:hover svg {
+.btn:hover svg, .preview-expand .expand-btn svg, .contact-box:hover svg {
   height: 60%;
 }
 
@@ -246,9 +284,9 @@ nav {
 }
 
 .preview-expand .preview {
-  height: 100%;
-  width: 100%;
-  transform: scale(1);
+  height: 125%;
+  width: 125%;
+  transform: scale(0.801);
 }
 
 .contact-page {
@@ -258,6 +296,7 @@ nav {
   align-items: center;
   height: 100%;
   padding-top: 100px;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -288,36 +327,81 @@ nav {
   text-decoration: none;
 }
 
-@media only screen and (max-width: 1595px) {
+.section {
+  box-sizing: border-box;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  color: black;
+  font-size: 17px;
+}
+
+.section .section-title {
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  text-transform: uppercase;
+  align-self: center;
+  padding: 3px 7px;
+  font-weight:500;
+  
+}
+
+.section .section-text {
+  padding: 10px 0;
+}
+
+.section-text > div {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: 85px auto;
+  grid-column-gap: 7px;
+}
+
+.section-list {
+  display: flex;
+  align-items: center;
+}
+
+.section-list-title {
+  width: 100%;
+  text-align: center;
+  align-self: flex-start;
+  font-weight: 500;
+  padding-bottom: 2px;
+  border-bottom: 1px solid black;
+}
+
+@media only screen and (max-width: 1395px) {
   .image img {
-    max-width: 300px;
+    max-width: 350px;
   }
 
   .about-page {
-    grid-template-columns: 300px auto;
+    grid-template-columns: 400px auto;
   }
 
   h3 {
-    font-size: 60px;
+    font-size: 70px;
   }
   
   h4 {
-    font-size: 50px;
+    font-size: 60px;
   }
 
   h5 {
-    font-size: 40px;
+    font-size: 50px;
   }
 
   .portfolio-page {
 
     grid-template-columns: 330px 330px 330px;
-    grid-template-rows: 200px 200px;
+    grid-template-rows: 200px 200px 200px;
     grid-row-gap: 50px;
+    padding: 60px 10px;
   }
   
   .portfolio-page-with-preview {
-    grid-template-rows: 500px 200px 200px;
+    grid-template-rows: auto 200px 200px 200px;
   }
   
   .preview-expand .preview {
@@ -326,34 +410,91 @@ nav {
     transform: scale(0.67);
   }
 
+  .preview-expand {
+    padding-bottom: 18px;
+    grid-template-columns: auto 330px;
+    grid-template-rows: 505px;
+  }
+
+  .section {
+    padding-bottom: 0;
+    font-size: 14px;
+  }
+  
+  .section .section-title {
+    font-size: 17px;
+  }
+  
+  
+  .section-text > div {
+    padding: 6px 0;
+    grid-template-columns: 65px auto;
+    grid-column-gap: 5px;
+  }
+
 }
 
-@media only screen and (max-width: 1300px) {
+@media only screen and (max-width: 1150px) {
+
+  header {
+    width: 100%;
+    margin: 0;
+    height: 90px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  main {
+    height: calc(100% - 60px);
+    top: 60px;
+  }
+
+  .title {
+    font-size: 45px;
+  }
+  
+  
+  .page-button {
+    font-size: 20px;
+  }
+
+  .image img {
+    max-width: 450px;
+  }
 
   .about-page {
     grid-template-columns: 100%;
-    grid-template-rows: 500px auto;
+    grid-template-rows: 700px auto;
   }
 
-  .about-page .image {
-    justify-content: flex-end;
+  .about-page .side-content {
+    justify-content: flex-start;
   }
 
   .portfolio-page {
 
     grid-template-columns: 330px 330px;
-    grid-template-rows: 200px 200px 200px;
+    grid-template-rows: 200px 200px 200px 200px 200px;
     justify-content: space-evenly;
   }
   
   .portfolio-page-with-preview {
-    grid-template-rows: 500px 200px 200px 200px;
+    grid-template-rows: auto 200px 200px 200px 200px;
   }
 
   .preview-expand {
     grid-area: 1 / 1 / 2 / 3;
-    
+    padding-bottom: 20px;
+    grid-template-columns: 100%;
+    grid-template-rows: 500px auto;
+    grid-row-gap: 15px;
   }
+  
+  .preview-expand .preview-description {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
 }
 
 @keyframes slide-in-left {

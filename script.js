@@ -32,6 +32,9 @@ $(document).ready(function(){
       left: '-100vw'
     }, 800, null, function() {
       // go to next
+      // if (ROUTES[currentRoute] === 'portfolio') {
+      //   $('#portfolio').empty();
+      // }
       window.history.pushState(null, null, target.text());
       onPathChange(target.text());
       node.css({left: 0});
@@ -43,6 +46,21 @@ $(document).ready(function(){
     currentRoute = ROUTES.indexOf(path);
     if (currentRoute === -1) {
       currentRoute = 0;
+    } else if (ROUTES[currentRoute] === 'portfolio' && isEmpty($('#portfolio'))) {
+      $('#portfolio').load('/portfolio.html', function() {
+        $('.expand-btn').click(function(e) {
+          var target = $(this).parent().parent();
+          var parent = target.parent();
+          target.siblings().removeClass('preview-expand');
+          if (target.hasClass('preview-expand')) { 
+            target.removeClass('preview-expand');
+            parent.removeClass('portfolio-page-with-preview');
+          } else { 
+            target.addClass('preview-expand');
+            parent.addClass('portfolio-page-with-preview'); 
+          }
+        })
+      });
     }
     var page = $(`#${ROUTES[currentRoute]}`);
     page.siblings().addClass('page');
@@ -50,22 +68,9 @@ $(document).ready(function(){
 
   }
 
-  $('.expand-btn').click(function(e) {
-    var target = $(this).parent().parent().parent();
-    var parent = target.parent();
-    target.siblings().removeClass('preview-expand');
-    if (target.hasClass('preview-expand')) { 
-      target.removeClass('preview-expand');
-      parent.removeClass('portfolio-page-with-preview');
-    } else { 
-      target.addClass('preview-expand');
-      parent.addClass('portfolio-page-with-preview'); 
-    }
-  })
-
-  animateCSSGrid.wrapGrid(document.querySelector(".portfolio-page"), {
-    duration: 400,
-    easing: 'easeInOut',
-  });
+  
 });
 
+function isEmpty( el ){
+  return !$.trim(el.html())
+}
