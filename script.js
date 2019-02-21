@@ -149,22 +149,21 @@ $(document).ready(function(){
               var targetIndex = target.index() + 1;
               var targetName = Object.values(ROUTES['portfolio'].subroutes).find(route => route.index === targetIndex).name;
               currentRoute.sub = {
-                index: route.index,
-                name: route.name
+                index: targetIndex,
+                name: targetName
               }
               window.history.pushState(currentRoute, null, `/portfolio/${targetName}`);
             }
           })
         });
       } else {
+        $('.portfolio-page').removeClass('portfolio-page-with-preview').children().removeClass('preview-expand');
         if (currentRoute.sub) {
           var target = $(`.portfolio-item:nth-child(${currentRoute.sub.index})`);
           var parent = target.parent();
           target.addClass('preview-expand');
-          parent.addClass('portfolio-page-with-preview'); 
-        } else {
-          $('.portfolio-page').removeClass('portfolio-page-with-preview').children().removeClass('preview-expand');
-        }
+          parent.addClass('portfolio-page-with-preview');
+        } 
       }
       
     }
@@ -175,6 +174,19 @@ $(document).ready(function(){
   }
 
   window.onpopstate = function(event) {
+    $("html, body").stop().animate({scrollTop:0}, 500, 'swing');
+
+    var target = $(`.page-button:nth-child(${event.state.index})`);
+    if (currentRoute.name !== target.text()) {
+      target.siblings('.page-button').removeClass('active');
+      target.addClass('active');
+      $('.slider').animate({
+        left: target.position().left,
+        width: target.width()
+      }, 700);
+    }
+
+
     currentRoute = event.state;
     onPathChange();
   };
