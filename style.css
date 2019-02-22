@@ -16,12 +16,13 @@ h3,h4,h5 {
   position: relative;
 }
 
+
 #portfolio, #resume, #contact {
   box-sizing: border-box;
   padding: 0 5%;
 }
 
-#about, #contact {
+#about, #contact, #resume {
   height: 100%;
 }
 
@@ -327,13 +328,21 @@ nav {
   text-decoration: none;
 }
 
-.section {
+.section, .resume-section {
   box-sizing: border-box;
   padding: 30px 20px;
   display: flex;
   flex-direction: column;
   color: black;
   font-size: 17px;
+}
+
+.resume-section {
+  padding: 10px 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: auto auto auto;
+  justify-content: space-between;
 }
 
 .section .section-title {
@@ -344,6 +353,70 @@ nav {
   padding: 3px 7px;
   font-weight:500;
   
+}
+
+.resume-section .section-header {
+  grid-area: 1 / 1 / 2 / 3;
+  border-bottom: 1px solid black;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight:500;
+  
+}
+
+.resume-section .section-subheader {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight:500;
+  padding-top: 10px;
+}
+
+.resume-section .section-subsubheader {
+  font-size: 12px;
+  text-transform: uppercase;
+  padding-top: 5px;
+}
+
+.resume-section .section-list {
+  margin: 0;
+  list-style-type: circle;
+  margin-top: 4px;
+  font-size: 14px;
+  grid-column: 1 / span 2;
+}
+
+.resume-pdf-link {
+  padding: 15px 0;
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.resume-pdf-link:hover {
+  color: #cccccc;
+}
+
+.resume-pdf-link svg {
+  margin-right: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.resume-section .section-link {
+  font-size: 16px;
+  padding-top: 10px;
+  color: inherit
+}
+
+.resume-section .section-text {
+  grid-column: 1 / span 2;
+  padding-bottom: 10px;
 }
 
 .section .section-text {
@@ -357,7 +430,7 @@ nav {
   grid-column-gap: 7px;
 }
 
-.section-list {
+.section .section-list {
   display: flex;
   align-items: center;
 }
@@ -445,8 +518,8 @@ nav {
   }
 
   main {
-    height: calc(100% - 60px);
-    top: 60px;
+    height: calc(100% - 90px);
+    top: 90px;
   }
 
   .title {
