@@ -123,7 +123,7 @@ $(document).ready(function(){
     
     if (currentRoute.name === 'portfolio') {
       if (isEmpty($('#portfolio'))) {
-        $('#portfolio').load('/portfolio.html', function() {
+        $('#portfolio').load('/portfolio-section.html', function() {
 
           if (currentRoute.sub) {
             var target = $(`.portfolio-item:nth-child(${currentRoute.sub.index})`);
